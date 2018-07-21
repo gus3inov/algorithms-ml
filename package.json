@@ -1,0 +1,55 @@
+{
+  "name": "algorithms-ml",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "nodemon --watch src/**/* -e ts,tsx --exec ts-node ./src/algorithms/03_recursion/03_factorial.ts",
+    "test": "ts-jest"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/jest": "^23.1.0",
+    "babel-core": "^6.26.3",
+    "babel-jest": "^23.0.1",
+    "jest": "^23.1.0",
+    "nodemon": "^1.17.3",
+    "regenerator-runtime": "^0.11.1",
+    "ts-jest": "^22.4.6"
+  },
+  "dependencies": {
+    "axios": "^0.18.0",
+    "express": "^4.16.3",
+    "koa": "^2.5.1",
+    "request": "^2.85.0",
+    "through2": "^2.0.3"
+  },
+  "jest": {
+    "collectCoverageFrom": [
+      "src/**/*.{js,jsx,ts,tsx}"
+    ],
+    "testMatch": [
+      "<rootDir>/src/**/__testss__/**/*.(j|t)s?(x)",
+      "<rootDir>/src/**/?(*.)(spec|test).(j|t)s?(x)"
+    ],
+    "testEnvironment": "node",
+    "testURL": "http://localhost",
+    "transformIgnorePatterns": [
+      "[/\\\\]node_modules[/\\\\].+\\.(js|jsx|mjs|ts|tsx)$"
+    ],
+    "moduleFileExtensions": [
+      "web.ts",
+      "ts",
+      "web.tsx",
+      "tsx",
+      "web.js",
+      "js",
+      "web.jsx",
+      "jsx",
+      "json",
+      "node",
+      "mjs"
+    ]
+  }
+}
