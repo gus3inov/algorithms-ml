@@ -1,5 +1,5 @@
 const personIsSeller = (name: string): boolean => name[name.length - 1] === 'm';
-const graphq = {};
+const graph: any = {};
 
 graph.you = ['alice', 'bob', 'claire'];
 graph.bob = ['anuj', 'peggy'];
