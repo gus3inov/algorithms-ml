@@ -18,7 +18,7 @@ const search = (name: string): boolean => {
   while(searchQueue.length) {
     const person: string = searchQueue.shift();
 
-    if (searched.indexOf(person === -1)) {
+    if (searched.indexOf(person == -1)) {
       if (personIsSeller(person)) {
         console.log(`${person} is a mongo seller !`);
         return true;
