@@ -2,7 +2,7 @@ console.clear();
 
 console.time('binary_search');
 
-export const binary_search = <T>(list: Array[T], item: T): T => {
+export const binary_search = <T extends number>(list: Array[T], item: T): T => {
     let low: T = 0,
         high: T = list.length - 1;
 
