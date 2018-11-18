@@ -1,13 +1,24 @@
 const fs = require('fs')
 
-fs.writeFile('data.html', 'Fuck you bitch !', 'UTF-8', err => {
-    if(err) throw new Error(err)
+const convertToFormat = data =>
+    data.splice(1).map(i => ({
+        id: i.B,
+        type: i.A,
+        geometry: {
+            type: i.C,
+            coordinates: [i.D, i.E]
+        },
+        properties: {
+            balloonContentHeader: i.F,
+            balloonContentBody: i.G,
+        }
+    }));
 
-    console.log('Thew file has changed or have been saved')
-})
-
-fs.appendFile('./src/data.html', 'data.html fasd fasdfa sdf \n', 'UTF-8', err => {
-    if(err) throw new Error(err)
-
-    console.log('Thew file has changed or have been saved')
-})
+fs.readFile('./src/node/data.json', 'utf8', (err, data) => {
+    if (err) {
+        console.log(err);
+    } else {
+        const json = JSON.stringify(convertToFormat(JSON.parse(data)));
+        fs.writeFileSync('nameOutputJson.json', json, 'utf8');
+    }
+});
