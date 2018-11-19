@@ -5,7 +5,8 @@
   "main": "src/index.js",
   "scripts": {
     "start": "nodemon --watch src/**/* -e ts,tsx --exec ts-node ./src/algorithms/08_greedy_algorithms/01_set_covering.ts",
-    "start:reason": "bsb -make-world -w",
+    "start:bsb": "bsb -make-world -w",
+    "start:reason": "nodemon --watch src/**/* -e ts,tsx --exec ts-node ./src/algorithms/01_binary_search/reason/binary_search.bs.js",
     "test": "ts-jest"
   },
   "author": "",
