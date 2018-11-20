@@ -1,9 +1,9 @@
 ####{BSB GENERATED: NO EDIT
 B lib\bs
 FLG -open Algorihtms
-FLG -ppx C:\OSPanel\domains\node-app\node_modules\bs-platform\lib\bsppx.exe
-S c:\OSPanel\domains\node-app\node_modules\bs-platform\lib\ocaml
-B c:\OSPanel\domains\node-app\node_modules\bs-platform\lib\ocaml
+FLG -ppx C:\Users\user\AppData\Roaming\npm\node_modules\bs-platform\lib\bsppx.exe
+S C:\OSPanel\domains\node-app\node_modules\bs-platform\lib\ocaml
+B C:\OSPanel\domains\node-app\node_modules\bs-platform\lib\ocaml
 FLG -nostdlib -color always
 FLG -w -30-40+6+7+27+32..39+44+45+101
 S src\algorithms\02_selection_sort\reason
