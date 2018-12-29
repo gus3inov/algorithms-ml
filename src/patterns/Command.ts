@@ -1,52 +1,52 @@
 class Invoker {
-    constructor(command) {
-        this.command = command;
-    }
+  constructor(command) {
+    this.command = command;
+  }
 
-    execute() {
-        this.command.execute();
-    }
+  execute() {
+    this.command.execute();
+  }
 }
 
 class Animal {
-    constructor() {
-        this.state = false;
-        this.actions = [];
-    }
+  constructor() {
+    this.state = false;
+    this.actions = [];
+  }
 
-    run() {
-        this.state = true;
-        this.actions.push("run");
-    }
+  run() {
+    this.state = true;
+    this.actions.push("run");
+  }
 
-    stay() {
-        this.state = false;
-        this.actions.push("stay");
-    }
+  stay() {
+    this.state = false;
+    this.actions.push("stay");
+  }
 
-    undo() {
-        this.actions.slice(1);
-    }
+  undo() {
+    this.actions.slice(1);
+  }
 }
 
 class RunRecieve {
-    constructor(animal) {
-        this.animal = animal;
-    }
+  constructor(animal) {
+    this.animal = animal;
+  }
 
-    execute() {
-        this.animal.run();
-    }
+  execute() {
+    this.animal.run();
+  }
 }
 
 class StayRecieve {
-    constructor(animal) {
-        this.animal = animal;
-    }
+  constructor(animal) {
+    this.animal = animal;
+  }
 
-    execute() {
-        this.animal.stay();
-    }
+  execute() {
+    this.animal.stay();
+  }
 }
 
 const animal = new Animal();
