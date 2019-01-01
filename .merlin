@@ -2,10 +2,14 @@
 B lib\bs
 FLG -open Algorihtms
 FLG -ppx D:\Projects\node-app\node_modules\bs-platform\lib\bsppx.exe
-S d:\Projects\node-app\node_modules\bs-platform\lib\ocaml
-B d:\Projects\node-app\node_modules\bs-platform\lib\ocaml
+S D:\Projects\node-app\node_modules\bs-platform\lib\ocaml
+B D:\Projects\node-app\node_modules\bs-platform\lib\ocaml
 FLG -nostdlib -color always
 FLG -w -30-40+6+7+27+32..39+44+45+101
+S src\reasonml_book\chapter_2
+B lib\bs\src\reasonml_book\chapter_2
+S src\reasonml_book\chapter_1
+B lib\bs\src\reasonml_book\chapter_1
 S src\algorithms\02_selection_sort\reason
 B lib\bs\src\algorithms\02_selection_sort\reason
 S src\algorithms\01_binary_search\reason
