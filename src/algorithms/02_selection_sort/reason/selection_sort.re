@@ -1,11 +1,11 @@
-type findSmallestIndex = array(int) => int;
+/* type findSmallestIndex = array(int) => int;
 
 let findSmallestIndex: findSmallestIndex =
   arr => {
     let smallestElement: ref(int) = ref(arr[0]);
     let smallestIndex: ref(int) = ref(0);
 
-    for (i in 1 to Array.length(arr)) {
+    (arr)) {
       if (arr[i] < smallestElement^) {
         smallestElement := arr[i];
         smallestIndex := i;
@@ -27,4 +27,4 @@ let selectionSort: selectionSort =
     };
 
     sortedArray;
-  };
+  }; */

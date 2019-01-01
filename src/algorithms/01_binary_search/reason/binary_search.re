@@ -1,4 +1,4 @@
-let binary_search = (
+/* let binary_search = (
   list: array(int),
   item: int
 ) => {
@@ -23,4 +23,4 @@ let binary_search = (
 
 let testArray: array(int) = [|1, 4, 5, 12, 231, 2, 3, 4|];
 
-Js.log(binary_search(testArray, 2));
+Js.log(binary_search(testArray, 2)); */
