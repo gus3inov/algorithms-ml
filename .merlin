@@ -2,10 +2,46 @@
 B lib\bs
 FLG -open Algorihtms
 FLG -ppx D:\Projects\node-app\node_modules\bs-platform\lib\bsppx.exe
-S D:\Projects\node-app\node_modules\bs-platform\lib\ocaml
-B D:\Projects\node-app\node_modules\bs-platform\lib\ocaml
+S d:\Projects\node-app\node_modules\bs-platform\lib\ocaml
+B d:\Projects\node-app\node_modules\bs-platform\lib\ocaml
 FLG -nostdlib -color always
 FLG -w -30-40+6+7+27+32..39+44+45+101
+S src\reasonml_book\chapter_4\src
+B lib\bs\src\reasonml_book\chapter_4\src
+S src\reasonml_book\chapter_4\node_modules\bs-webapi\src
+B lib\bs\src\reasonml_book\chapter_4\node_modules\bs-webapi\src
+S src\reasonml_book\chapter_4\node_modules\bs-webapi\src\file
+B lib\bs\src\reasonml_book\chapter_4\node_modules\bs-webapi\src\file
+S src\reasonml_book\chapter_4\node_modules\bs-webapi\src\dom
+B lib\bs\src\reasonml_book\chapter_4\node_modules\bs-webapi\src\dom
+S src\reasonml_book\chapter_4\node_modules\bs-webapi\src\dom\validation
+B lib\bs\src\reasonml_book\chapter_4\node_modules\bs-webapi\src\dom\validation
+S src\reasonml_book\chapter_4\node_modules\bs-webapi\src\dom\traversal
+B lib\bs\src\reasonml_book\chapter_4\node_modules\bs-webapi\src\dom\traversal
+S src\reasonml_book\chapter_4\node_modules\bs-webapi\src\dom\sets
+B lib\bs\src\reasonml_book\chapter_4\node_modules\bs-webapi\src\dom\sets
+S src\reasonml_book\chapter_4\node_modules\bs-webapi\src\dom\selection
+B lib\bs\src\reasonml_book\chapter_4\node_modules\bs-webapi\src\dom\selection
+S src\reasonml_book\chapter_4\node_modules\bs-webapi\src\dom\ranges
+B lib\bs\src\reasonml_book\chapter_4\node_modules\bs-webapi\src\dom\ranges
+S src\reasonml_book\chapter_4\node_modules\bs-webapi\src\dom\nodes
+B lib\bs\src\reasonml_book\chapter_4\node_modules\bs-webapi\src\dom\nodes
+S src\reasonml_book\chapter_4\node_modules\bs-webapi\src\dom\html
+B lib\bs\src\reasonml_book\chapter_4\node_modules\bs-webapi\src\dom\html
+S src\reasonml_book\chapter_4\node_modules\bs-webapi\src\dom\geometry
+B lib\bs\src\reasonml_book\chapter_4\node_modules\bs-webapi\src\dom\geometry
+S src\reasonml_book\chapter_4\node_modules\bs-webapi\src\dom\events
+B lib\bs\src\reasonml_book\chapter_4\node_modules\bs-webapi\src\dom\events
+S src\reasonml_book\chapter_4\node_modules\bs-webapi\src\dom\css
+B lib\bs\src\reasonml_book\chapter_4\node_modules\bs-webapi\src\dom\css
+S src\reasonml_book\chapter_4\node_modules\bs-webapi\src\core
+B lib\bs\src\reasonml_book\chapter_4\node_modules\bs-webapi\src\core
+S src\reasonml_book\chapter_4\node_modules\bs-webapi\src\canvas
+B lib\bs\src\reasonml_book\chapter_4\node_modules\bs-webapi\src\canvas
+S src\reasonml_book\chapter_4\node_modules\bs-webapi\lib\ocaml
+B lib\bs\src\reasonml_book\chapter_4\node_modules\bs-webapi\lib\ocaml
+S src\reasonml_book\chapter_3
+B lib\bs\src\reasonml_book\chapter_3
 S src\reasonml_book\chapter_2
 B lib\bs\src\reasonml_book\chapter_2
 S src\reasonml_book\chapter_1
