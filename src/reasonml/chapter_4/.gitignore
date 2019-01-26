@@ -5,6 +5,7 @@
 /bundledOutputs/
 .bsb.lock
 .cache
+/dist
 
 .merlin
 # misc
