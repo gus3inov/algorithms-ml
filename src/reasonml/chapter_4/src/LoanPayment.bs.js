@@ -75,8 +75,7 @@ function toFloat(s) {
 }
 
 function getStringValue(id) {
-  var element = document.getElementById(id);
-  return Belt_Option.map(Belt_Option.map((element == null) ? undefined : Caml_option.some(element), (function (prim) {
+  return Belt_Option.map(Belt_Option.map(Caml_option.nullable_to_opt(document.getElementById(id)), (function (prim) {
                     return prim;
                   })), (function (prim) {
                 return prim.value;
