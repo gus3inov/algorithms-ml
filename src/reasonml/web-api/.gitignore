@@ -1,7 +1,6 @@
 # dependencies
 /node_modules/
 /lib/*
-!/lib/js/*
 /bundledOutputs/
 .bsb.lock
 .cache
