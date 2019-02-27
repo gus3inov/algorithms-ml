@@ -83,7 +83,7 @@ function lineReducer(acc, line) {
                                   /* color : White */0,
                                   /* pattern : Solid */0,
                                   /* cuff : Button */0,
-                                  /* collar : Button */0
+                                  /* collar : Straight */1
                                 ], optInt(Caml_array.caml_array_get(items, 0)), (function (result, n) {
                                     return /* record */[
                                             /* quantity */n,
@@ -94,65 +94,65 @@ function lineReducer(acc, line) {
                                             /* cuff */result[/* cuff */5],
                                             /* collar */result[/* collar */6]
                                           ];
-                                  })), Shirts.Size[/* fromString */1](Caml_array.caml_array_get(items, 1)), (function (result, size) {
+                                  })), Shirts.Size[/* fromString */1](Caml_array.caml_array_get(items, 1)), (function (result, sz) {
                                 return /* record */[
                                         /* quantity */result[/* quantity */0],
-                                        /* size */size,
+                                        /* size */sz,
                                         /* sleeve */result[/* sleeve */2],
                                         /* color */result[/* color */3],
                                         /* pattern */result[/* pattern */4],
                                         /* cuff */result[/* cuff */5],
                                         /* collar */result[/* collar */6]
                                       ];
-                              })), Shirts.Sleeve[/* fromString */1](Caml_array.caml_array_get(items, 2)), (function (result, sleeve) {
+                              })), Shirts.Color[/* fromString */1](Caml_array.caml_array_get(items, 2)), (function (result, c) {
                             return /* record */[
                                     /* quantity */result[/* quantity */0],
                                     /* size */result[/* size */1],
-                                    /* sleeve */sleeve,
-                                    /* color */result[/* color */3],
+                                    /* sleeve */result[/* sleeve */2],
+                                    /* color */c,
                                     /* pattern */result[/* pattern */4],
                                     /* cuff */result[/* cuff */5],
                                     /* collar */result[/* collar */6]
                                   ];
-                          })), Shirts.Color[/* fromString */1](Caml_array.caml_array_get(items, 3)), (function (result, color) {
+                          })), Shirts.Pattern[/* fromString */1](Caml_array.caml_array_get(items, 3)), (function (result, pat) {
                         return /* record */[
                                 /* quantity */result[/* quantity */0],
                                 /* size */result[/* size */1],
                                 /* sleeve */result[/* sleeve */2],
-                                /* color */color,
-                                /* pattern */result[/* pattern */4],
+                                /* color */result[/* color */3],
+                                /* pattern */pat,
                                 /* cuff */result[/* cuff */5],
                                 /* collar */result[/* collar */6]
                               ];
-                      })), Shirts.Pattern[/* fromString */1](Caml_array.caml_array_get(items, 4)), (function (result, pattern) {
+                      })), Shirts.Collar[/* fromString */1](Caml_array.caml_array_get(items, 4)), (function (result, coll) {
                     return /* record */[
                             /* quantity */result[/* quantity */0],
                             /* size */result[/* size */1],
                             /* sleeve */result[/* sleeve */2],
                             /* color */result[/* color */3],
-                            /* pattern */pattern,
+                            /* pattern */result[/* pattern */4],
                             /* cuff */result[/* cuff */5],
-                            /* collar */result[/* collar */6]
+                            /* collar */coll
                           ];
-                  })), Shirts.Cuff[/* fromString */1](Caml_array.caml_array_get(items, 5)), (function (result, cuff) {
+                  })), Shirts.Sleeve[/* fromString */1](Caml_array.caml_array_get(items, 5)), (function (result, sleeve) {
                 return /* record */[
                         /* quantity */result[/* quantity */0],
                         /* size */result[/* size */1],
-                        /* sleeve */result[/* sleeve */2],
+                        /* sleeve */sleeve,
                         /* color */result[/* color */3],
                         /* pattern */result[/* pattern */4],
-                        /* cuff */cuff,
+                        /* cuff */result[/* cuff */5],
                         /* collar */result[/* collar */6]
                       ];
-              })), Shirts.Collar[/* fromString */1](Caml_array.caml_array_get(items, 6)), (function (result, collar) {
+              })), Shirts.Cuff[/* fromString */1](Caml_array.caml_array_get(items, 6)), (function (result, cuff) {
             return /* record */[
                     /* quantity */result[/* quantity */0],
                     /* size */result[/* size */1],
                     /* sleeve */result[/* sleeve */2],
                     /* color */result[/* color */3],
                     /* pattern */result[/* pattern */4],
-                    /* cuff */result[/* cuff */5],
-                    /* collar */collar
+                    /* cuff */cuff,
+                    /* collar */result[/* collar */6]
                   ];
           }));
     if (orderRecord !== undefined) {
@@ -166,16 +166,47 @@ function lineReducer(acc, line) {
   }
 }
 
-function printStatistics(orders) {
-  var colorDistribution = Belt_List.reduce(orders, Belt_Map.make(Shirts.ColorComparator), (function (acc, item) {
-          var n = Belt_Map.getWithDefault(acc, item[/* color */3], 0);
-          return Belt_Map.set(acc, item[/* color */3], n + item[/* quantity */0] | 0);
+function printMap(title, distribution, toString) {
+  console.log(title, "Quantity");
+  Belt_Map.forEach(distribution, (function (key, value) {
+          console.log(Curry._1(toString, key), value);
+          return /* () */0;
         }));
-  console.log("Color", "Quanity");
-  return Belt_Map.forEach(colorDistribution, (function (key, value) {
-                console.log(Shirts.Color[/* toString */0](key), value);
-                return /* () */0;
-              }));
+  console.log("");
+  return /* () */0;
+}
+
+function printStatistics(orders) {
+  var makeDistro = function (comprator, getter) {
+    return Belt_List.reduce(orders, Belt_Map.make(comprator), (function (acc, item) {
+                  var n = Belt_Map.getWithDefault(acc, Curry._1(getter, item), 0);
+                  return Belt_Map.set(acc, Curry._1(getter, item), n + item[/* quantity */0] | 0);
+                }));
+  };
+  var colorDistribution = makeDistro(Shirts.ColorComparator, (function (ord) {
+          return ord[/* color */3];
+        }));
+  printMap("Color", colorDistribution, Shirts.Color[/* toString */0]);
+  var sizeDistribution = makeDistro(Shirts.SizeComparator, (function (ord) {
+          return ord[/* size */1];
+        }));
+  printMap("Size", sizeDistribution, Shirts.Size[/* toString */0]);
+  var patternDistribution = makeDistro(Shirts.PatternComparator, (function (ord) {
+          return ord[/* pattern */4];
+        }));
+  printMap("Pattern", patternDistribution, Shirts.Pattern[/* toString */0]);
+  var collarDistribution = makeDistro(Shirts.CollarComparator, (function (ord) {
+          return ord[/* collar */6];
+        }));
+  printMap("Collar", collarDistribution, Shirts.Collar[/* toString */0]);
+  var sleeveDistribution = makeDistro(Shirts.SleeveComparator, (function (ord) {
+          return ord[/* sleeve */2];
+        }));
+  printMap("Sleeve", sleeveDistribution, Shirts.Sleeve[/* toString */0]);
+  var cuffDistribution = makeDistro(Shirts.CuffComparator, (function (ord) {
+          return ord[/* cuff */5];
+        }));
+  return printMap("Cuff", cuffDistribution, Shirts.Cuff[/* toString */0]);
 }
 
 function processFile(inFileName) {
@@ -202,6 +233,7 @@ exports.map2 = map2;
 exports.optInt = optInt;
 exports.optFloat = optFloat;
 exports.lineReducer = lineReducer;
+exports.printMap = printMap;
 exports.printStatistics = printStatistics;
 exports.processFile = processFile;
 exports.nodeArg = nodeArg;

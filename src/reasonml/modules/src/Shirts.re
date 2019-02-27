@@ -30,6 +30,12 @@ module Size = {
   };
 };
 
+module SizeComparator =
+  Belt.Id.MakeComparable({
+    type t = Size.t;
+    let cmp = compare;
+  });
+
 module Cuff = {
   type t =
     | Button
@@ -56,6 +62,12 @@ module Cuff = {
   };
 };
 
+module CuffComparator =
+  Belt.Id.MakeComparable({
+    type t = Cuff.t;
+    let cmp = compare;
+  });
+
 module Sleeve = {
   type t =
     | Short
@@ -79,6 +91,12 @@ module Sleeve = {
     };
   };
 };
+
+module SleeveComparator =
+  Belt.Id.MakeComparable({
+    type t = Sleeve.t;
+    let cmp = compare;
+  });
 
 module Color = {
   type t =
@@ -140,6 +158,12 @@ module Pattern = {
   };
 };
 
+module PatternComparator =
+  Belt.Id.MakeComparable({
+    type t = Pattern.t;
+    let cmp = compare;
+  });
+
 module Collar = {
   type t =
     | Button
@@ -163,6 +187,12 @@ module Collar = {
     };
   };
 };
+
+module CollarComparator =
+  Belt.Id.MakeComparable({
+    type t = Collar.t;
+    let cmp = compare;
+  });
 
 type order = {
   quantity: int,

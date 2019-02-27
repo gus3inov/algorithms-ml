@@ -49,6 +49,10 @@ var Size = /* module */[
   /* fromString */fromString
 ];
 
+var cmp = Caml_obj.caml_compare;
+
+var SizeComparator = Belt_Id.MakeComparable(/* module */[/* cmp */cmp]);
+
 function toString$1(cuff) {
   switch (cuff) {
     case 0 : 
@@ -82,6 +86,10 @@ var Cuff = /* module */[
   /* fromString */fromString$1
 ];
 
+var cmp$1 = Caml_obj.caml_compare;
+
+var CuffComparator = Belt_Id.MakeComparable(/* module */[/* cmp */cmp$1]);
+
 function toString$2(sleeve) {
   switch (sleeve) {
     case 0 : 
@@ -112,6 +120,10 @@ var Sleeve = /* module */[
   /* toString */toString$2,
   /* fromString */fromString$2
 ];
+
+var cmp$2 = Caml_obj.caml_compare;
+
+var SleeveComparator = Belt_Id.MakeComparable(/* module */[/* cmp */cmp$2]);
 
 function toString$3(color) {
   switch (color) {
@@ -152,9 +164,9 @@ var Color = /* module */[
   /* fromString */fromString$3
 ];
 
-var cmp = Caml_obj.caml_compare;
+var cmp$3 = Caml_obj.caml_compare;
 
-var ColorComparator = Belt_Id.MakeComparable(/* module */[/* cmp */cmp]);
+var ColorComparator = Belt_Id.MakeComparable(/* module */[/* cmp */cmp$3]);
 
 function toString$4(pattern) {
   switch (pattern) {
@@ -187,6 +199,10 @@ var Pattern = /* module */[
   /* fromString */fromString$4
 ];
 
+var cmp$4 = Caml_obj.caml_compare;
+
+var PatternComparator = Belt_Id.MakeComparable(/* module */[/* cmp */cmp$4]);
+
 function toString$5(collar) {
   switch (collar) {
     case 0 : 
@@ -218,6 +234,10 @@ var Collar = /* module */[
   /* fromString */fromString$5
 ];
 
+var cmp$5 = Caml_obj.caml_compare;
+
+var CollarComparator = Belt_Id.MakeComparable(/* module */[/* cmp */cmp$5]);
+
 var myOrder = /* record */[
   /* quantity */1,
   /* size : XLarge */Block.__(1, [1]),
@@ -229,11 +249,16 @@ var myOrder = /* record */[
 ];
 
 exports.Size = Size;
+exports.SizeComparator = SizeComparator;
 exports.Cuff = Cuff;
+exports.CuffComparator = CuffComparator;
 exports.Sleeve = Sleeve;
+exports.SleeveComparator = SleeveComparator;
 exports.Color = Color;
 exports.ColorComparator = ColorComparator;
 exports.Pattern = Pattern;
+exports.PatternComparator = PatternComparator;
 exports.Collar = Collar;
+exports.CollarComparator = CollarComparator;
 exports.myOrder = myOrder;
-/* ColorComparator Not a pure module */
+/* SizeComparator Not a pure module */

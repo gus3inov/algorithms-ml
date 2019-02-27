@@ -1,6 +1,6 @@
 open Shirts;
 
-let map2 = (optX, optY, f) => {
+let map2 = (optX: 'x, optY: 'y, f): option('f) => {
   switch (optX, optY) {
   | (Some(x), Some(y)) => Some(f(x, y))
   | (_, _) => None
@@ -23,38 +23,41 @@ let optFloat = (str: string): option(float) => {
 
 let lineReducer = (acc: list(order), line: string): list(order) => {
   let items = Js.String.split(",", line);
-
   if (Belt.Array.length(items) != 7) {
     acc;
   } else {
     let initial =
       Some({
         quantity: 0,
-        size: Size.Small,
-        sleeve: Sleeve.Short,
-        color: Color.White,
-        pattern: Pattern.Solid,
-        cuff: Cuff.Button,
-        collar: Collar.Button,
+        size: Small,
+        sleeve: Short,
+        color: White,
+        pattern: Solid,
+        cuff: Button,
+        collar: Straight,
       });
 
     let orderRecord =
       map2(initial, optInt(items[0]), (result, n) =>
         {...result, quantity: n}
       )
-      ->map2(Size.fromString(items[1]), (result, size) => {...result, size})
-      ->map2(Sleeve.fromString(items[2]), (result, sleeve) =>
+      ->map2(Size.fromString(items[1]), (result, sz) =>
+          {...result, size: sz}
+        )
+      ->map2(Color.fromString(items[2]), (result, c) =>
+          {...result, color: c}
+        )
+      ->map2(Pattern.fromString(items[3]), (result, pat) =>
+          {...result, pattern: pat}
+        )
+      ->map2(Collar.fromString(items[4]), (result, coll) =>
+          {...result, collar: coll}
+        )
+      ->map2(Sleeve.fromString(items[5]), (result, sleeve) =>
           {...result, sleeve}
         )
-      ->map2(Color.fromString(items[3]), (result, color) =>
-          {...result, color}
-        )
-      ->map2(Pattern.fromString(items[4]), (result, pattern) =>
-          {...result, pattern}
-        )
-      ->map2(Cuff.fromString(items[5]), (result, cuff) => {...result, cuff})
-      ->map2(Collar.fromString(items[6]), (result, collar) =>
-          {...result, collar}
+      ->map2(Cuff.fromString(items[6]), (result, cuff) =>
+          {...result, cuff}
         );
 
     switch (orderRecord) {
@@ -64,21 +67,52 @@ let lineReducer = (acc: list(order), line: string): list(order) => {
   };
 };
 
+let printMap =
+    (
+      title: string,
+      distribution: Belt.Map.t('k, 'v, 'id),
+      toString: 'a => string,
+    ) => {
+  Js.log2(title, "Quantity");
+  Belt.Map.forEach(distribution, (key, value) =>
+    Js.log2(toString(key), value)
+  );
+  Js.log("");
+};
+
 let printStatistics = (orders: list(order)): unit => {
-  let colorDistribution =
+  let makeDistro = (comprator, getter) => {
     Belt.List.reduce(
       orders,
-      Belt.Map.make(~id=(module ColorComparator)),
+      Belt.Map.make(~id=comprator),
       (acc, item) => {
-        let n = Belt.Map.getWithDefault(acc, item.color, 0);
-        Belt.Map.set(acc, item.color, n + item.quantity);
+        let n = Belt.Map.getWithDefault(acc, getter(item), 0);
+        Belt.Map.set(acc, getter(item), n + item.quantity);
       },
     );
+  };
 
-  Js.log2("Color", "Quanity");
-  Belt.Map.forEach(colorDistribution, (key, value) =>
-    Js.log2(Color.toString(key), value)
-  );
+  let colorDistribution =
+    makeDistro((module ColorComparator), ord => ord.color);
+  printMap("Color", colorDistribution, Color.toString);
+
+  let sizeDistribution = makeDistro((module SizeComparator), ord => ord.size);
+  printMap("Size", sizeDistribution, Size.toString);
+
+  let patternDistribution =
+    makeDistro((module PatternComparator), ord => ord.pattern);
+  printMap("Pattern", patternDistribution, Pattern.toString);
+
+  let collarDistribution =
+    makeDistro((module CollarComparator), ord => ord.collar);
+  printMap("Collar", collarDistribution, Collar.toString);
+
+  let sleeveDistribution =
+    makeDistro((module SleeveComparator), ord => ord.sleeve);
+  printMap("Sleeve", sleeveDistribution, Sleeve.toString);
+
+  let cuffDistribution = makeDistro((module CuffComparator), ord => ord.cuff);
+  printMap("Cuff", cuffDistribution, Cuff.toString);
 };
 
 let processFile = (inFileName: string): unit => {
@@ -90,7 +124,6 @@ let processFile = (inFileName: string): unit => {
 
   printStatistics(orders);
 };
-
 
 let nodeArg = Belt.Array.get(Node.Process.argv, 0);
 let progArg = Belt.Array.get(Node.Process.argv, 1);
